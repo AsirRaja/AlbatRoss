@@ -163,10 +163,10 @@ C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\ob
 C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\obj\Debug\net8.0\AlbatRoss.csproj.Up2Date
 C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\obj\Debug\net8.0\AlbatRoss.dll
 C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\obj\Debug\net8.0\refint\AlbatRoss.dll
 C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\obj\Debug\net8.0\AlbatRoss.pdb
 C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\obj\Debug\net8.0\AlbatRoss.genruntimeconfig.cache
 C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\obj\Debug\net8.0\ref\AlbatRoss.dll
+C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\obj\Debug\net8.0\AlbatRoss.sourcelink.json
