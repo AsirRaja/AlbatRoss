@@ -22,6 +22,10 @@ using (System.IO.StreamReader file = new System.IO.StreamReader(System.IO.Direct
     }
     DataConnection.setConnection(connect);
 }
+// ======= PORT configuration =======
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Urls.Add($"http://*:{port}");
+// ======= PORT configuration end =======
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

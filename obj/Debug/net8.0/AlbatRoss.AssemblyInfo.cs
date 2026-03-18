@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AlbatRoss")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6eae846591980662b0a56ef10e67790428dd2705")]
 [assembly: System.Reflection.AssemblyProductAttribute("AlbatRoss")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AlbatRoss")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
