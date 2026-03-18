@@ -1,0 +1,85 @@
+﻿@model Albat.Models.ClientModel
+@{
+    <nav class="home-section2" style="background: radial-gradient(circle, rgba(238,174,228,1) 61%, rgba(148,187,233,1) 100%);">
+        <div class="sidebar-button">
+            @*<span class="dashboard" style="text-shadow: 2px 2px 5px red;font-size:35px;">Albatrose Ladies*@  @*Saloon</span>*@
+            <span class="dashboard" style="text-shadow: 2px 2px 5px red;font-size:35px;">Clients Details</span>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; grid-column-gap: 7px; grid-row-gap: 7px">
+            <a href="/Home/Clients?id="><i class="fa fa-refresh fa-spin" style="color:black;font-size:35px"></i></a>
+        </div>
+    </nav>
+    <body>
+        <form asp-action="Clients">
+            <div style="display:flex;justify-content:center;">
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;grid-column-gap:10px">
+                    <label style="font-size:1.5em; font-weight:bold">Phone No :</label>
+                    <input type="text" id="phone" asp-for="@Model.Contact" class="borderheight" maxlength="10" autocomplete="off" />
+                    <button class="bookmarkBtn">
+                        <span class="IconContainer">
+                            <svg viewBox="0 0 384 512" height="1em" class="icon">
+                                <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"></path>
+                            </svg>
+                        </span>
+                        <p class="text">View</p>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <br />
+        <div style="overflow: scroll; height: 825px;">
+            <table class="styletable" style="width:100%" id="tableClient">
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Service Name</th>
+                        <th>Amount</th>
+                        <th>Contact</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ClientDetails != null)
+                    {
+                        @for (int ii = 0; ii < Model.ClientDetails.Count; ii++)
+                        {
+                            <tr>
+                                <td>@Model.ClientDetails[ii].ClientName</td>
+                                <td>@Model.ClientDetails[ii].ServiceName</td>
+                                <td>@Model.ClientDetails[ii].Amount</td>
+                                <td>@Model.ClientDetails[ii].Contact</td>
+                                <td>@Model.ClientDetails[ii].Date.ToString("dd-MM-yyyy HH:mm")</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <script>
+            function getClientsData() {
+                var phone = document.getElementById("phone").value;
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/Clients?phone=" + phone,
+                    success: function (response) {
+                        $('#tableClient tbody').append(response);
+                    },
+                    error: function (error) {
+                        alert('Error writing to file!');
+                    }
+                });
+            }
+        </script>
+    </body>
+    <style>
+        .borderheight {
+            height: 32px;
+            border-radius: 5px;
+            border-color: gray;
+            background: radial-gradient(circle at 10% 20%, rgb(220, 182, 232) 100.2%,rgb(163, 175, 243) 0% );
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+    </style>
+}

@@ -1,0 +1,305 @@
+﻿@model Albat.Models.MemberShipModel
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    <nav class="home-section2" style="background: radial-gradient(circle, rgba(238,174,228,1) 61%, rgba(148,187,233,1) 100%);">
+        <div class="sidebar-button">
+            <span class="dashboard" style="text-shadow: 2px 2px 5px red;font-size:35px;">MemberShip Details</span>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; grid-column-gap: 7px; grid-row-gap: 7px">
+            <a href="/Home/MemberShip?id="><i class="fa fa-refresh fa-spin" style="color:black;font-size:35px"></i></a>
+        </div>
+    </nav>
+    <body>
+        <div id="temp" hidden>@ViewData["id"]</div>
+        <div style="display:grid;grid-template-columns:450px 220px 250px 100px;">
+            <button class="Btn" onclick="AddMemberShip()"></button>
+            <label style="font-size:25px;padding-top:5px;font-weight:bold">Phone Number :</label>
+            <input type="text" placeholder="Enter the Phone No" id="phoneno" class="borderheight" autocomplete="off" />
+            <button class="bookmarkBtn" onclick="getCustomer()">
+                <span class="IconContainer">
+                    <svg viewBox="0 0 384 512" height="0.9em" class="icon">
+                        <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"></path>
+                    </svg>
+                </span>
+                <p class="text">Search</p>
+            </button>
+        </div>
+        <div style="overflow: scroll; height: 845px;">
+            <table class="styletable" id="myTable">
+                <thead>
+                    <tr>
+                        <th>MemberShip No</th><th>Customer Name</th><th>Contact</th><th>Joining Date</th><th>Finishing Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @if (Model.MemberList != null)
+                        {
+                            @for (int ii = 0; ii < Model.MemberList.Count; ii++)
+                            {
+                                <tr>
+                                    <td>@Model.MemberList[ii].MemberShipNo </td><td>@Model.MemberList[ii].CustomerName</td><td id="prices">@Model.MemberList[ii].Contact </td>
+                                    <td id="tot">@Model.MemberList[ii].JoinDate.ToString("dd-MM-yyyy HH:mm")</td><td>@Model.MemberList[ii].FinishDate.ToString("dd-MM-yyyy HH:mm")</td>
+                                    <td><label><i class='fa fa-trash-o' style='font-size:26px;color:red;margin:10px' onclick="removeRow(this)"></i></label></td>
+                                </tr>
+                            }
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h1 style="font-weight:bold;">MemberShip Card</h1>
+                </div>
+                <div style="display:grid;grid-template-columns:0.5fr 1fr 1fr 1fr;grid-column-gap:10px;grid-row-gap:30px;margin:10px">
+                    <label></label>
+                    <label class="labels">Customer Name <span style="color:red">*</span></label>
+                    <input type="text" class="textbox" id="customer" placeholder="Enter the CustomerName" />
+                    <label></label>
+                    <label></label>
+                    <label class="labels">Contact <span style="color:red">*</span></label>
+                    <input type="text" class="textbox" id="contact" placeholder="Enter the PhoneNo" />
+                    <label></label>
+                    <label></label>
+                    <label class="labels">Joining Date <span style="color:red">*</span></label>
+                    <input type="datetime-local" class="textbox" id="join" asp-for="@Model.JoinDate" />
+                    <label></label>
+                    <label></label>
+                    <label class="labels">Finishing Date <span style="color:red">*</span></label>
+                    <input type="datetime-local" id="finish" class="textbox" asp-for="@Model.FinishDate"  />
+                    <label></label>
+                    <label></label>
+                    <label class="labels">MemberShip No </label>
+                    <input type="text" class="textbox" id="member" asp-for="@Model.MemberShipNo" readonly />
+                    <label></label>
+                </div>
+                <div style="display:flex;justify-content:center;padding-top:3%">
+                    <button class="bookmarkBtn" onclick="memberShipDetails()">
+                        <span class="IconContainer">
+                            <svg viewBox="0 0 384 512" height="0.9em" class="icon">
+                                <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"></path>
+                            </svg>
+                        </span>
+                        <p class="text">Save</p>
+                    </button>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        function memberShipDetails() {
+            var cusname = document.getElementById("customer").value;
+            var contact = document.getElementById("contact").value;
+            var datejoin = document.getElementById("join").value;
+            var comdate = document.getElementById("finish").value;
+            var memberno = document.getElementById("member").value;
+            if (cusname === "") {
+                document.getElementById("customer").style.backgroundColor = "#F52791";
+                return false;
+            }
+            else if (contact === "") {
+                document.getElementById("contact").style.backgroundColor = "#F52791";
+                document.getElementById("customer").style.backgroundColor = "white";
+                return false;
+            }
+            else if (datejoin === "") {
+                document.getElementById("join").style.backgroundColor = "#F52791";
+                document.getElementById("contact").style.backgroundColor = "white";
+                return false;
+            }
+            else if (comdate === "") {
+                document.getElementById("finish").style.backgroundColor = "#F52791";
+                document.getElementById("join").style.backgroundColor = "white";
+                return false;
+            }
+            else {
+                document.getElementById("customer").style.backgroundColor = "white";
+                document.getElementById("contact").style.backgroundColor = "white";
+                document.getElementById("finish").style.backgroundColor = "white";
+                document.getElementById("join").style.backgroundColor = "white";
+            }
+            var parameter = memberno + '~' + cusname + '~' + contact + '~' + datejoin + '~' + comdate;
+            $.ajax({
+                type: "POST",
+                url: "/Home/MemberShipDetails?id=" + parameter,
+                success: function (response) {
+                    alert('save');
+                },
+                error: function (error) {
+                    alert('Error writing to file!');
+                }
+            });
+        }
+    </script>
+    <script>
+        function AddMemberShip(icon) {
+             $.ajax({
+                type: "GET",
+                url: "/Home/GenerateIds",
+                data: {id : "2" },
+                success: function (response) {
+                    document.getElementById("member").value = response;
+                }
+            });
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+            var btn = document.getElementById("memberBtn");
+            if (icon != 'membership') {
+                var $row = $(icon).closest('tr');
+                document.getElementById('customer').value = $row.find('td:eq(1)').text();
+                document.getElementById('contact').value = $row.find('td:eq(2)').text();
+            }
+            var span = document.getElementsByClassName("close")[0];
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+        function removeRow(button) {
+            @*const tdElement = button.closest('td');
+            var $row = $(button).closest('tr');
+            var row = button.parentNode.parentNode;                                     // Get the parent row of the button
+            row.parentNode.removeChild(row);               *@                             // Remove the row from the table
+        }
+    </script>
+    <script>
+        function getCustomer() {
+            var contact = document.getElementById("phoneno").value;
+            document.getElementById("temp").innerHTML = contact;
+            var parameter = '?id=~' + document.getElementById("temp").innerHTML;
+            window.location.href = "@Url.Action("MemberShip", "Home")" + "/" + parameter;
+        }
+    </script>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 140px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%;
+        }
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-header {
+            padding: 2px 16px;
+            background-color: black;
+            color: white;
+        }
+
+        .modal-body {
+            padding: 2px 16px;
+        }
+
+        .modal-footer {
+            padding: 2px 16px;
+            background-color: #white;
+            color: white;
+        }
+
+        .modelpadding {
+            padding-bottom: 20px;
+        }
+
+        .borderheight {
+            height: 32px;
+            border-radius: 5px;
+            border-color: gray;
+            width: 70%;
+            background: radial-gradient(circle at 10% 20%, rgb(220, 182, 232) 100.2%,rgb(163, 175, 243) 0% );
+            font-weight: bold;
+        }
+
+        .Btn {
+            width: 190px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);
+            background-size: 250%;
+            background-position: left;
+            color: #ffd277;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition-duration: 1s;
+            overflow: hidden;
+        }
+        .Btn::before {
+            position: absolute;
+            content: "Add MemberShip";
+            color: #ffd277;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 97%;
+            height: 90%;
+            border-radius: 8px;
+            transition-duration: 1s;
+            background-color: rgba(0, 0, 0, 0.842);
+            background-size: 200%;
+        }
+        .Btn:hover {
+            background-position: right;
+            transition-duration: 1s;
+            transform: translateY(-3px);
+        }
+        .Btn:hover::before {
+            background-position: right;
+            transition-duration: 1s;
+        }
+        .Btn:active {
+            transform: scale(0.95);
+        }
+        .textbox {
+            border-radius: 10px;
+            width: 300px;
+            height: 35px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .labels {
+            font-weight: bold;
+            margin:10px;
+            font-size: 1.2em;
+        }
+    </style>
+}

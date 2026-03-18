@@ -1,0 +1,71 @@
+﻿@model Albat.Models.Makeup
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    <nav class="home-section2" style="background: radial-gradient(circle, rgba(238,174,228,1) 61%, rgba(148,187,233,1) 100%);">
+        <div class="sidebar-button">
+            <span id="header" class="dashboard" style="text-shadow: 2px 2px 5px red;font-size:35px;">Makeup Details</span>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; grid-column-gap: 7px; grid-row-gap: 7px">
+            <a href="/Home/Makeup?id="><i class="fa fa-refresh fa-spin" style="color:black;font-size:35px"></i></a>
+        </div>
+    </nav>
+    <br />
+    <body>
+        <form asp-action="MakeUpDetails">
+            <div style="display:flex; justify-content:center">
+                <div style="display:grid;grid-template-columns:0.2fr 2fr 0.2fr 2fr 1fr;grid-column-gap:10px;grid-row-gap:10px">
+                    <label style="font-size:28px">From</label>
+                    <input type="date" id="start" class="borderheight" asp-for="@Model.FromDate" my-date-format="DD/MM/YYYY" />
+                    <label style="font-size:28px">To</label>
+                    <input type="date" id="start" class="borderheight" asp-for="@Model.ToDate" my-date-format="DD/MM/YYYY" />
+                    <button class="bookmarkBtn" onclick="return funcall()" formmethod="post">
+                        <span class="IconContainer">
+                            <svg viewBox="0 0 384 512" height="0.9em" class="icon">
+                                <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"></path>
+                            </svg>
+                        </span>
+                        <p class="text">Save</p>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <br />
+        @if (HttpContextAccessor.HttpContext.Session.GetString("Login") == "EMP0001")
+        {
+            <div style="margin:5px;"><label style="font-weight:900;font-size:1.8em">Grand Total : @Model.Total</label></div>
+        }
+        <div style="margin:10px;overflow: scroll;height: 760px;">
+            <table class="styletable" id="tableMakeup" width="100%">
+                <thead>
+                    <tr>
+                        <th>Name</th><th>Phone</th><th>Place</th><th>Date</th><th>Time</th><th>Makeup Amount</th><th>Advance</th><th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.MakeUp != null)
+                    {
+                        @for (int ii = 0; ii < Model.MakeUp.Count; ii++)
+                        {
+                            <tr>
+                                <td>@Model.MakeUp[ii].Name</td><td>@Model.MakeUp[ii].Phone</td><td>@Model.MakeUp[ii].Place</td>
+                                <td>@Model.MakeUp[ii].MakeupDate</td><td>@Model.MakeUp[ii].Time</td><td>@Model.MakeUp[ii].MakeupAmount</td>
+                                <td>@Model.MakeUp[ii].Total</td><td>@Model.MakeUp[ii].Amount</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <script>
+    </script>
+    <style>
+        .borderheight {
+            height: 32px;
+            border-radius: 5px;
+            border-color: gray;
+            width: 70%;
+            background: radial-gradient(circle at 10% 20%, rgb(220, 182, 232) 100.2%,rgb(163, 175, 243) 0% );
+        }
+    </style>
+}

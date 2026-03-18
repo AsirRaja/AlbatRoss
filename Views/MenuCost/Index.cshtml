@@ -1,0 +1,208 @@
+﻿@model Albat.Models.Menu
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    <nav class="home-section2" style="background: radial-gradient(circle, rgba(238,174,228,1) 61%, rgba(148,187,233,1) 100%);">
+        <div class="sidebar-button">
+            <span class="dashboard" style="text-shadow: 2px 2px 5px red;font-size:35px;">Price Details</span>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; grid-column-gap: 7px; grid-row-gap: 7px">
+            <a href="/MenuCost/Index"><i class="fa fa-refresh fa-spin" style="color:black;font-size:35px"></i></a>
+        </div>
+    </nav>
+    <br />
+    <body>
+        <div style="margin:0px">
+            <div style="display:grid;grid-template-columns: 60px 50px 300px">
+                <div class="tooltip">
+                    <span class="tooltiptext" style="width: 80px;">Save</span>
+                    <label onclick="save()" style="font-size:36px"><i class="fa fa-save"></i></label>
+                </div>
+                <div class="tooltip">
+                    <span class="tooltiptext" style="width: 130px;">Add Services</span>
+                    <label onclick="openwin()" style="font-size:36px"><i class="fa fa-plus"></i></label>
+                </div>
+                <div>
+                    <input type="search" class="borderheight" list="options" id="Select" placeholder="Search Services" style="height:35px;border-radius:5px;margin-right:100px;" />
+                    <datalist class="borderheight" id="options">
+                        @foreach (var item in Model.Items)
+                        {
+                            <option value="@item.Text"></option>
+                        }
+                    </datalist>
+                </div>
+            </div>
+            <div style="overflow: scroll; height: 820px; background-color: white">
+                <table id="entrytable" width="100%" style="border: solid 1px black;" >
+                    <thead style="background-color: grey; position: sticky; top: 0; z-index: 4;">
+                        <tr>
+                            @foreach (var item in AlbatRoss.Controllers.CommonUtil.ToEnumCollection<AlbatRoss.Controllers.CommonUtil.RateColumns>().Select(x => AlbatRoss.Controllers.CommonUtil.GetEnumDescription(x)))
+                            {
+                                if(@item == ""){
+                                    <th style="background-color: #FF0000;color:white;font-size:25px; min-width: 40px;height:40px;text-align: center" id="delete">@item</th>
+                                }
+                                else{
+                                    <th style="background-color: #FF0000;color:white;font-size:25px; min-width: 240px;height:40px;text-align: center">@item</th>
+                                }
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ListValues)
+                        {
+                            <tr style="background-color: #FFE4E1;">
+                                <td style="min-width: 240px;height: 30px;text-align: center;border-bottom: solid 1px black;font-weight:bold">@item.Id</td>
+                                <td style="min-width: 240px;height: 30px;text-align: center;border-bottom: solid 1px black;font-weight:bold" contenteditable="true">@item.ProductName</td>
+                                <td style="min-width: 240px;height: 30px;text-align: center;border-bottom: solid 1px black;font-weight:bold" contenteditable="true">@item.Price</td>
+                                <td style="min-width: 240px;height: 30px;text-align: center;border-bottom: solid 1px black;font-weight:bold" contenteditable="true">@item.MemberRate</td>
+                                <td style="min-width: 240px;height: 30px;text-align: center;border-bottom: solid 1px black;font-weight:bold" contenteditable="true">@item.OfferRate</td>
+                                <td style="min-width: 40px;height: 30px;text-align: center;border-bottom: solid 1px black;font-weight:bold" contenteditable="true" onclick='removeRow(this)'><i class='fa fa-trash-o' style='font-size:26px;color:red;margin:10px'></i></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h1>Add Services</h1>
+                </div>
+                <div style="display:grid;grid-template-columns:0.3fr 1.3fr 1fr 1fr;grid-column-gap:10px;grid-row-gap:30px;margin:10px">
+                    <label></label>
+                    <label class="labels">Service Name <span style="color:red">*</span></label>
+                    <input type="text" class="textbox" id="service" placeholder="Enter the Service Name" />
+                    <label></label><label></label>
+                    <label class="labels">Rate <span style="color:red">*</span></label>
+                    <input type="text" class="textbox" id="rate" placeholder="Enter the Rate" />
+                    <label></label><label></label>
+                    <label class="labels">Member Ship Rate <span style="color:red">*</span></label>
+                    <input type="text" class="textbox" id="memberrate" placeholder="Enter the Member Ship Rate" />
+                    <label></label><label></label>
+                    <label class="labels">Offer Rate <span style="color:red">*</span></label>
+                    <input type="text" class="textbox" id="offerrate" placeholder="Enter the Offer Rate" />
+                    <label></label><label></label>
+                </div>
+                <div style="display:flex;justify-content:center;padding-top:3%">
+                    <button class="bookmarkBtn" onclick="AddService()">
+                        <span class="IconContainer">
+                            <svg viewBox="0 0 384 512" height="0.9em" class="icon">
+                                <path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"></path>
+                            </svg>
+                        </span>
+                        <p class="text">Save</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        function save(){
+            var valid = true;
+            var table = document.getElementById("entrytable");
+            valid = ValidateTable(table,4, 'Id');               
+            if(valid){
+                var tableData = [];
+                $('#entrytable tbody tr').each(function () {
+                    var rowData = {
+                        Id: $(this).find('td:eq(0)').text(), ProductName: $(this).find('td:eq(1)').text(), Price: $(this).find('td:eq(2)').text(),
+                        MemberRate: $(this).find('td:eq(3)').text(), OfferRate: $(this).find('td:eq(4)').text(),
+                    };
+                    tableData.push(rowData);
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "/MenuCost/SaveDatas",
+                    data: JSON.stringify(tableData),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        alert("Successfully Saved");
+                        window.location.href = "@Url.Action("Index", "MenuCost")";
+                    }
+                });
+            }
+        }
+        function openwin(){
+            document.getElementById("myModal").style.display='block';
+        }
+        function AddService(){
+            var service = document.getElementById("service").value;
+            var rate = document.getElementById("rate").value;
+            var memberrate = document.getElementById("memberrate").value;
+            var offer = document.getElementById("offerrate").value;
+            $.ajax({
+                type: "GET",
+                url: "/MenuCost/AddServices",
+                data: {'serviceName': service, 'price': rate, 'memberRate': memberrate,'offerRate': offer},
+                success: function (response) {
+                    if(response == "true"){
+                        alert("Successfully Saved");
+                    }
+                    else{
+                        alert(response);
+                    }
+                }
+            });
+        }
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function () {
+            document.getElementById("myModal").style.display='none';
+            window.location.href = "@Url.Action("Index", "MenuCost")";
+        }
+        function removeRow(button) {
+            const tdElement = button.closest('td');
+            var $row = $(button).closest('tr');
+            var id = $row.find('td:eq(0)').text();
+            var service = $row.find('td:eq(1)').text();
+            alert(id);
+            $.ajax({
+                type: "GET",
+                url: "/MenuCost/DeleteServices",
+                data: {'id': id, 'serviceName': service },
+                success: function (response) {
+                    alert(response);
+                    window.location.href = "@Url.Action("Index", "MenuCost")";
+                }
+            });
+        }
+    </script>
+    <script>
+        let previousRow;
+        document.getElementById('Select').addEventListener('change', function () {
+            var select = this.value;
+            var table = document.getElementById("entrytable");
+            previousRow = ValidateTableRow(table, select, previousRow);
+        });
+    </script>
+    <style>
+        .textbox {
+            border-radius: 10px;
+            width: 300px;
+            height: 35px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .borderheight {
+            height: 40px;
+            border-radius: 5px;
+            border-color: gray;
+            width: 70%;
+            background: radial-gradient(circle at 10% 20%, rgb(220, 182, 232) 100.2%,rgb(163, 175, 243) 0% );
+            font-weight: bold;
+        }
+        .subborderheight {
+            height: 32px;
+            border-radius: 5px;
+            border-color: red;
+        }
+        .selected {
+            background-color: lightgreen;
+        }
+        .labels {
+            font-weight: bold;
+            margin: 10px;
+            font-size: 1.2em;
+        }
+    </style>
+}

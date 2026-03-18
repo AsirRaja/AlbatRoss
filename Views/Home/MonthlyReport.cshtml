@@ -1,0 +1,65 @@
+﻿@model Albat.Models.MonthlyCost
+@{
+    var years = ViewBag.Years as List<int>;
+    <nav class="home-section2" style="background: radial-gradient(circle, rgba(238,174,228,1) 61%, rgba(148,187,233,1) 100%);">
+        <div class="sidebar-button">
+            @*<span class="dashboard" style="text-shadow: 2px 2px 5px red;font-size:35px;">Albatrose Ladies Professional Saloon</span>*@
+            <span class="dashboard" style="text-shadow: 2px 2px 5px red;font-size:35px;">MonthlyLog Details</span>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; grid-column-gap: 7px; grid-row-gap: 7px">
+            <a href="/Home/MonthlyReport"><i class="fa fa-refresh fa-spin" style="color:black;font-size:35px"></i></a>
+        </div>
+    </nav>
+    <br />
+    <body>
+        <select id="comboYear" asp-for="Year" onselect="yearSelect()" style="width:250px;height:35px;border-radius: 10px; border:1px solid black;font-size:1em;font-weight:bold; margin-left:10px; background-color:#FFE4E1;">
+            @foreach (var year in years)
+            {
+                <option value="@year">@year</option>
+            }
+        </select>
+        <br />
+        <div class="section-content">
+            <table class="styletable" style="width:100%;" id="tableClient">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Total Service</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.stock != null)
+                    {
+                        @for (int ii = 0; ii < Model.stock.Count; ii++)
+                        {
+                            <tr>
+                                <td>@Model.stock[ii].Month</td>
+                                <td>@Model.stock[ii].Services</td>
+                                <td>@Model.stock[ii].Total</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <script>
+        function select(e){
+            alert(document.getElementById("comboYear").innerHTML);
+            console.log(e);
+        }
+        function yearSelect(e){
+            alert(e);
+        }
+    </script>
+    <style>
+        .borderheight {
+            height: 32px;
+            border-radius: 5px;
+            border-color: gray;
+            width: 70%;
+            background: radial-gradient(circle at 10% 20%, rgb(220, 182, 232) 100.2%,rgb(163, 175, 243) 0% );
+        }
+    </style>
+}

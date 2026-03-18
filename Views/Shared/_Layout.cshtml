@@ -1,0 +1,420 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Albatross Ladies Professional Salon</title>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/js/site.js"></script>
+    <link rel="icon" href="~/images/logorecent.png">   @*Header Logo*@
+    <script src="~/js/jquery.min.js"></script>         @*JQuery Link file add for wwwroot/js*@
+
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <span class="logo_name" style="display: block; margin-left: 19%;margin-right: auto;width:0%;"><img src="~/images/NewsUntitled.png" /></span>
+        </div>
+        <ul class="nav-links">
+            <li class="activa">
+                <a href="/Home/Service">
+                    <i class="fa-solid fa fa-paint-brush" style="font-size:30px"></i>
+                    <span class="link_name">Services</span>
+                </a>
+            </li>
+            <li class="activa">
+                <a href="/MakeUp/Makeup">
+                    <i class="fa fa-twitter-square" style="font-size:30px"></i>
+                    <span class="link_name">MakeUp</span>
+                </a>
+            </li>
+            <li class="activa">
+                <a href="/Home/MemberShip">
+                    <i class="fa-solid fa fa-id-card-o" style="font-size:30px"></i>
+                    <span class="link_name">Member Ship</span>
+                </a>
+            </li>
+            <li class="activa">
+                <a href="/Home/DailyLog">
+                    <i class="fa-solid fa fa-eye" style="font-size:30px"></i>
+                    <span class="link_name">Daily Log</span>
+                </a>
+            </li>
+            @if (HttpContextAccessor.HttpContext.Session.GetString("Login") == "EMP0001")
+            {
+                <li class="activa">
+                    <a href="/MakeUp/MakeUpDetails">
+                        <i class="	fa fa-angellist" style="font-size:30px"></i>
+                        <span class="link_name">MakeUp Details</span>
+                    </a>
+                </li>
+            }
+            @if (HttpContextAccessor.HttpContext.Session.GetString("Login") == "EMP0001")
+            {
+                <li class="activa">
+                    <a href="/Home/MonthlyReport">
+                        <i class="fa fa-bookmark" style="font-size:30px"></i>
+                        <span class="link_name">Monthly Report</span>
+                    </a>
+                </li>
+            }
+            @if (HttpContextAccessor.HttpContext.Session.GetString("Login") == "EMP0001")
+            {
+                <li class="activa">
+                    <a href="/MenuCost/Index">
+                        <i class="fa fa-rupee" style="font-size:30px"></i>
+                        <span class="link_name">Details</span>
+                    </a>
+                </li>
+            }
+            <li class="activa">
+                <a href="/Home/Clients">
+                    <i class="fa-solid fa fa-user" style="font-size:30px"></i>
+                    <span class="link_name">Clients</span>
+                </a>
+            </li>
+            <li class="activa">
+                <a href="/Home/Menu">
+                    <i class="fa-solid fa fa-user-secret" style="font-size:30px"></i>
+                    <span class="link_name">Menu Card</span>
+                </a>
+            </li>
+            <li class="activa">
+                <a href="/User/Login">
+                    <i class="fa-solid fa fa-sign-out" style="font-size:30px"></i>
+                    <span class="link_name">Log Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section" style="background: radial-gradient(circle at 10% 20%, rgb(220, 182, 232) 100.2%,rgb(163, 175, 243) 0% );">
+        <div style="display:grid;grid-template-rows:20px 1fr;grid-template-columns:1fr;">
+            <div>
+            </div>
+            @RenderBody()
+        </div>
+    </section>
+    <footer class="footer text-center d-flex align-items-center">
+        <div class="container pb-0">
+        </div>
+    </footer>
+    @RenderSection("scripts", required: false)
+    <script>
+        const arrowButton = document.querySelectorAll(".menu-arrow");
+        const subMenu = document.querySelector(".sub-menu");
+        arrowButton.forEach((el) =>
+            el.addEventListener("click", () => {
+                subMenu.classList.toggle("open");
+            })
+        );
+    </script>
+</body>
+</html>
+<style>
+    body {
+        width:100%;
+        overflow: hidden;
+        margin: 0;              @*Browser Default ah Margin set pannum Atha Remove Panna*@
+    }
+    .sidebar {
+        position: fixed;
+        height: 100%;
+        width: 240px;
+        background: #000000;
+        transition: all 0.6s ease;
+        border-radius: 5px;
+    }
+
+    .sidebar.active {
+        width: 60px;
+    }
+
+    .sidebar .logo-details {
+        height: 100px;
+        width: 100%;
+        display: flex;
+        align-items: left;
+        padding-top: 10px;
+    }
+
+        .sidebar .logo-details i {
+            font-size: 28px;
+            font-weight: 500;
+            color: #fff;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .sidebar .logo-details .logo_name {
+            font-size: 24px;
+            font-weight: 500;
+            color: #fff;
+            margin-left: 0px;
+        }
+
+    .sidebar .nav-links {
+        margin-top: 16px;
+        padding-left: 0px;
+    }
+
+        .sidebar .nav-links li {
+            @* height: 50px;*@ 
+        width: 100%;
+            list-style: none;
+        }
+
+    .activa {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.5s ease;
+        background-color: #000000;
+    }
+
+    .sidebar .nav-links li a {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.5s ease;
+    }
+
+        .sidebar .nav-links li a:hover {
+            @*background: radial-gradient(circle, rgba(238,174,202,1) 35%, rgba(148,187,233,1) 100%);"*@ background: #ffff7f;
+        }
+
+        .sidebar .nav-links li a i {
+            min-width: 60px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .sidebar .nav-links li a .link_name {
+            color: #fff;
+            font-size: 25px;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+
+    .home-section {
+        background: #f5f5f5;
+        position: relative;
+        width: calc(100% - 240px);
+        height: 100vh;
+        left: 240px;
+        transition: all 0.5s ease;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .sidebar.active ~ .home-section {
+        width: calc(100% - 60px);
+        left: 60px;
+    }
+
+    .home-section nav {
+        width: 100%;
+        height: 60px;
+        background: #fff;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.5s ease;
+    }
+
+    .sidebar.active ~ .home-section nav {
+        width: calc(100% - 60px);
+        left: 60px;
+    }
+
+    .home-section nav .sidebar-button {
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+        .home-section nav .sidebar-button i {
+            font-size: 35px;
+            margin-right: 10px;
+            display: flex;
+        }
+    .styletable {
+        border-collapse: collapse;
+        margin: 0px 0;
+        min-width: 100%;
+        font-size: 0.8em;
+        font-family: sans-serif;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+    .styletable thead tr {
+        background-color: black;
+        border: 2px solid white;
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        font-size: 1.5em;
+    }
+    .styletable th,
+    .styletable td {
+        text-align: center;
+        padding: 12px 12px;
+        font-weight: bold;
+    }
+    .styletable tbody tr {
+        border-bottom: 1px solid #dddddd;
+        font-weight: bold;
+    }
+    .styletable tbody tr:last-of-type {
+        border-bottom: 2px solid #dddddd;
+    }
+
+    .styletable tbody tr.active-row {
+        font-weight: bold;
+        color: #dddddd;
+    }
+    .bookmarkBtn {
+        width: 100px;
+        height: 40px;
+        border-radius: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.349);
+        background-color: rgb(12, 12, 12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition-duration: 0.3s;
+        overflow: hidden;
+    }
+    .IconContainer {
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(to bottom, rgb(255, 136, 255), rgb(172, 70, 255));
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        z-index: 2;
+        transition-duration: 0.3s;
+    }
+    .icon {
+        border-radius: 1px;
+    }
+    .text {
+        height: 100%;
+        width: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        z-index: 1;
+        transition-duration: 0.3s;
+        font-size: 1.04em;
+    }
+    .bookmarkBtn:hover .IconContainer {
+        width: 90px;
+        transition-duration: 0.3s;
+    }
+    .bookmarkBtn:hover .text {
+        transform: translate(10px);
+        width: 0;
+        font-size: 0;
+        transition-duration: 0.3s;
+    }
+    .bookmarkBtn:active {
+        transform: scale(0.95);
+        transition-duration: 0.3s;
+    }
+    @*Dialog Box Start*@
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 240px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%;
+    }
+    .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .modal-header {
+        padding: 2px 16px;
+        background-color: blue;
+        color: white;
+    }
+    .modal-body {
+        padding: 2px 16px;
+    }
+    .modal-footer {
+        padding: 2px 16px;
+        background-color: white;
+        color: white;
+    }
+    .modelpadding {
+        padding-bottom: 20px;
+    }
+    @*Dialog Box End*@
+
+    @*Tooltip Start*@
+    .tooltiptext {
+        visibility: hidden;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        top: 80px;
+        z-index: 1;
+    }
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+    @*Tooltip End*@
+    .error {                        @*Table Validation*@
+        background-color: red;
+        color: white;
+    }
+    .label {
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+    .inputclass {
+        width: 300px;
+        height: 35px;
+        background-color: papayawhip;
+        border: 1px solid black;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+</style>

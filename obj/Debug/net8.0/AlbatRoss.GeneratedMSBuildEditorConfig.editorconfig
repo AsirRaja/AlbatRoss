@@ -1,0 +1,81 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = AlbatRoss
+build_property.RootNamespace = AlbatRoss
+build_property.ProjectDir = C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\CADMACRO\Documents\AlbatRoss_Mar10\AlbatRoss (1)\AlbatRoss\AlbatRoss
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/Home/Clients.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDbGllbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/Home/DailyLog.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYWlseUxvZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/Home/MemberShip.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZW1iZXJTaGlwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/Home/Menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZW51LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/Home/MonthlyReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNb250aGx5UmVwb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/Home/Service.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZXJ2aWNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/MakeUp/MakeUp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFrZVVwXE1ha2VVcC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/MakeUp/MakeUpDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFrZVVwXE1ha2VVcERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/MenuCost/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudUNvc3RcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/User/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CADMACRO/Documents/AlbatRoss_Mar10/AlbatRoss (1)/AlbatRoss/AlbatRoss/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-a8t7xo6ol9

@@ -1,0 +1,148 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@{
+    <div class="image-container">
+        <img width="100%" height="100%" src="~/images/MakeUp1.jpg" />
+        <div class="classdiv">
+            <h1>Albatross Ladies Professional Salon</h1>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; grid-column-gap: 20px; grid-row-gap:20px">
+                <label style="font-size: 2.25em">Name</label>
+                <input type="text" class="inputclass" id="Name" placeholder="Name" autocomplete="off" />
+                <label style="font-size: 2.25em">Phone</label>
+                <input type="text" class="inputclass" id="Phone" placeholder="Phone No" maxlength="10" autocomplete="off" />
+                <label style="font-size: 2.25em">Place</label>
+                <input type="text" class="inputclass" id="Place" placeholder="Place" autocomplete="off" />
+                <label style="font-size: 2.25em">Date</label>
+                <input type="date" id="Date" class="inputclass" />
+
+                <label style="font-size: 2.25em">Time</label>
+                <input type="time" id="time" class="inputclass" />
+
+                <label style="font-size: 2.25em">Amount</label>
+                <input type="text" class="inputclass" id="Amount" placeholder="Amount" autocomplete="off" />
+                <label style="font-size: 2.25em">Advance</label>
+                <input type="text" class="inputclass" id="Advance" placeholder="Advance" autocomplete="off" />
+                <label style="font-size: 2.25em">Balance</label>
+                <input type="text" class="inputclass" id="balance" placeholder="Balance" autocomplete="off" readonly />
+            </div>
+            <br />
+            <button onclick="savemakeupdetails()" style="width:200px; height:30px;font-size:1em; background-color:papayawhip;gap:100%;margin-left:100px">Save</button>
+        </div>
+    </div>
+}
+<script>
+    function savemakeupdetails(){
+        var arrayval = ["Name","Phone","Place","Date","time","Amount","Advance"];
+        var valid = ValidateEmpty(arrayval);
+        var contact = document.getElementById("Phone").value;
+
+        var phoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/; @*Contact Check RegEx Method*@
+        if (!phoneNum.test(contact)) {
+            document.getElementById("Phone").style.backgroundColor = 'red';
+            alert("Please Check Contact");
+            return false;
+        }
+        else{
+            document.getElementById("Phone").style.backgroundColor = '';
+        }
+        var time = document.getElementById("time").value;
+        var amount = document.getElementById("Amount").value;
+        var advance = document.getElementById("Advance").value;
+
+        let hour = time.split(":")[0];
+        let minute = time.split(":")[1];
+        let ampm = hour >= 12 ? "PM" : "AM";    // AM PM Set 
+        hour = hour % 12;
+        hour = hour ? hour : 12;
+        let finalTime = hour + ":" + minute + " " + ampm;
+
+        if(Number(amount) < Number(advance)){
+            document.getElementById("Amount").style.backgroundColor = 'red';
+            document.getElementById("Advance").style.backgroundColor = 'red';
+            alert("Amount Greater than Advance Please change the Advance");
+            return false;
+        }
+        else{
+            document.getElementById("Amount").style.backgroundColor = '';
+            document.getElementById("Advance").style.backgroundColor = '';
+        }
+        if(valid){
+            $.ajax({
+                type: "GET",
+                url: "/MakeUp/Save",
+                data: { 'name' : document.getElementById("Name").value, 'phone': document.getElementById("Phone").value,
+                        'place': document.getElementById("Place").value , 'date': document.getElementById("Date").value,
+                        'time': finalTime, 'amount': amount,'advance': advance,'balance': document.getElementById("balance").value  },
+                success: function (result) {
+                    alert("Successfully Saved");
+                }
+            });
+        }
+    }
+    document.getElementById("Amount").addEventListener("input", function(event){
+        this.value = this.value.replace(/[^0-9]/g, '');
+        var amount = this.value;
+        var advance = document.getElementById("Advance").value;
+        
+        if(advance != ""){
+            var total = Number(amount) - Number(advance);
+            document.getElementById("balance").value = total;
+        }
+        else{
+            document.getElementById("balance").value = amount;
+        }
+    });
+    document.getElementById("Advance").addEventListener("input", function(event){
+        this.value = this.value.replace(/[^0-9]/g, '');
+        var advance = this.value;
+        var amount = document.getElementById("Amount").value;
+        
+        if(advance != ""){
+            var total = Number(amount) - Number(advance);
+            document.getElementById("balance").value = total;
+        }
+        else{
+            document.getElementById("balance").value = amount;
+        }
+    });
+</script>
+<style>
+    .image-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top:0%;
+        background-repeat: no-repeat;
+        background-blend-mode: overlay;
+        overflow: hidden;
+        margin: 0;
+    }
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        overflow: hidden;
+        margin: 0;
+    }
+    .classdiv{
+        border-radius: 10px;
+        padding: 50px;
+        box-shadow: 0 0rem 9rem rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
+        top: 45%;
+        max-width: 30%;
+        position: absolute;
+        left: 25%;
+        height: fit-content;
+        transform: translate(-50%,-50%);
+        color:wheat;
+        overflow: hidden;
+    }
+    @*.inputclass{
+        width: 300px;
+        height: 35px;
+        background-color: papayawhip;
+        border: 1px solid black;
+        font-weight:bold;
+        font-size:1.2em;
+    }*@
+</style>
